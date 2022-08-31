@@ -117,6 +117,9 @@ class RCTVideo extends RCTView {
   set repeat(value: boolean) {
     this.videoElement.loop = value;
   }
+  set keepSilence(value: boolean) {
+    this.videoElement.keepSilence = value;
+  }
 
   set resizeMode(value: number) {
     switch (value) {

@@ -24,6 +24,7 @@ class RCTVideoManager extends RCTViewManager {
       .addNumberProp("progressUpdateInterval", this.setProgressUpdateInterval)
       .addBooleanProp("rate", this.setRate)
       .addBooleanProp("repeat", this.setRepeat)
+      .addBooleanProp("keepSilence", this.setKeepSilence)
       .addNumberProp("resizeMode", this.setResizeMode)
       .addNumberProp("seek", this.setSeek)
       .addObjectProp("src", this.setSource)
@@ -67,6 +68,9 @@ class RCTVideoManager extends RCTViewManager {
     view.repeat = value;
   }
 
+  setKeepSilence(view: RCTVideo, value: boolean) {
+    view.keepSilence = value;
+  }
   setResizeMode(view: RCTVideo, value: number) {
     view.resizeMode = value;
   }

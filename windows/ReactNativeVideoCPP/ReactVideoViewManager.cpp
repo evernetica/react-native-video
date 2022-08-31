@@ -42,6 +42,7 @@ IMapView<hstring, ViewManagerPropertyType> ReactVideoViewManager::NativeProps() 
   nativeProps.Insert(L"src", ViewManagerPropertyType::Map);
   nativeProps.Insert(L"resizeMode", ViewManagerPropertyType::String);
   nativeProps.Insert(L"repeat", ViewManagerPropertyType::Boolean);
+  nativeProps.Insert(L"keepSilence", ViewManagerPropertyType::Boolean);
   nativeProps.Insert(L"paused", ViewManagerPropertyType::Boolean);
   nativeProps.Insert(L"muted", ViewManagerPropertyType::Boolean);
   nativeProps.Insert(L"volume", ViewManagerPropertyType::Number);

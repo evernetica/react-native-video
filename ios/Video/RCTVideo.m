@@ -64,6 +64,7 @@ static int const RCTVideoUnset = -1;
   BOOL _muted;
   BOOL _paused;
   BOOL _repeat;
+  BOOL _keepSilence;
   BOOL _allowsExternalPlayback;
   NSArray * _textTracks;
   NSDictionary * _selectedTextTrack;
@@ -918,7 +919,10 @@ static int const RCTVideoUnset = -1;
 - (void)setIgnoreSilentSwitch:(NSString *)ignoreSilentSwitch
 {
   _ignoreSilentSwitch = ignoreSilentSwitch;
-  [self configureAudio];
+  if (!_keepSilence) {
+    [self configureAudio];
+  }
+  
   [self applyModifiers];
 }
 
@@ -935,7 +939,9 @@ static int const RCTVideoUnset = -1;
     [_player setRate:0.0];
   } else {
 
-    [self configureAudio];
+    if (!_keepSilence) {
+      [self configureAudio];
+    }
 
     if (@available(iOS 10.0, *) && !_automaticallyWaitsToMinimizeStalling) {
       [_player playImmediatelyAtRate:_rate];
@@ -1064,6 +1070,7 @@ static int const RCTVideoUnset = -1;
   [self setSelectedTextTrack:_selectedTextTrack];
   [self setResizeMode:_resizeMode];
   [self setRepeat:_repeat];
+  [self setKeepSilence:_keepSilence];
   [self setPaused:_paused];
   [self setControls:_controls];
   [self setAllowsExternalPlayback:_allowsExternalPlayback];
@@ -1098,6 +1105,10 @@ static int const RCTVideoUnset = -1;
 
 - (void)setRepeat:(BOOL)repeat {
   _repeat = repeat;
+}
+
+- (void)setKeepSilence:(BOOL)keepSilence {
+  _keepSilence = keepSilence;
 }
 
 - (void)setMediaSelectionTrackForCharacteristic:(AVMediaCharacteristic)characteristic
