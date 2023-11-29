@@ -144,6 +144,8 @@ public class ReactVideoView extends ScalableVideoView implements
     private boolean isCompleted = false;
     private boolean mUseNativeControls = false;
 
+    private boolean isPausedInBackground = false;
+
     public ReactVideoView(ThemedReactContext themedReactContext) {
         super(themedReactContext);
 
@@ -402,7 +404,7 @@ public class ReactVideoView extends ScalableVideoView implements
             if (!mMediaPlayer.isPlaying()) {
                 start();
                 // Setting the rate unpauses, so we have to wait for an unpause
-                if (mRate != mActiveRate) { 
+                if (mRate != mActiveRate) {
                     setRateModifier(mRate);
                 }
 
@@ -411,6 +413,25 @@ public class ReactVideoView extends ScalableVideoView implements
             }
         }
         setKeepScreenOn(!mPaused && mPreventsDisplaySleepDuringVideoPlayback);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+
+        if (!mMediaPlayerValid) {
+            return;
+        }
+
+        if(!hasFocus && !this.mPaused){
+            isPausedInBackground = true;
+            this.mPaused = true;
+        }
+        else if(hasFocus && isPausedInBackground){
+            isPausedInBackground = false;
+            this.mPaused = false;
+            this.start();
+        }
     }
 
     // reduces the volume based on stereoPan
@@ -677,7 +698,7 @@ public class ReactVideoView extends ScalableVideoView implements
             setKeepScreenOn(false);
         }
     }
-        
+
     // This is not fully tested and does not work for all forms of timed metadata
     @TargetApi(23) // 6.0
     public class TimedMetaDataAvailableListener
@@ -777,7 +798,7 @@ public class ReactVideoView extends ScalableVideoView implements
 
         return result;
     }
-        
+
     // Select track (so we can use it to listen to timed meta data updates)
     private void selectTimedMetadataTrack(MediaPlayer mp) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
