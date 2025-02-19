@@ -1,6 +1,6 @@
-package com.brentvatne.react;
+package com.brentvatne_a.react;
 
-import com.brentvatne.react.ReactVideoView.Events;
+import com.brentvatne_a.react.ReactVideoView.Events;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
 
-    public static final String REACT_CLASS = "RCTVideo";
+    public static final String REACT_CLASS = "RCTVideo_a";
 
     public static final String PROP_SRC = "src";
     public static final String PROP_SRC_URI = "uri";

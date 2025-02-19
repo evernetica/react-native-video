@@ -1,4 +1,4 @@
-package com.brentvatne.exoplayer;
+package com.brentvatne_a.exoplayer;
 
 import android.content.Context;
 import android.net.Uri;
@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 
 public class ReactExoplayerViewManager extends ViewGroupManager<ReactExoplayerView> {
 
-    private static final String REACT_CLASS = "RCTVideo";
+    private static final String REACT_CLASS = "RCTVideo_a";
 
     private static final String PROP_SRC = "src";
     private static final String PROP_SRC_URI = "uri";
